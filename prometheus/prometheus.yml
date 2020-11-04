@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 2s
+  scrape_timeout: 2s
+  evaluation_interval: 2s
+
+scrape_configs:
+  - job_name: wad-2020
+    scrape_interval: 2s
+    metrics_path: "/actuator/prometheus"
+    scheme: "http"
+    static_configs:
+      - targets:
+          - "webflux-container:8081"
+        labels:
+          name: webflux
+      - targets:
+          - "mvc-container:8082"
+        labels:
+          name: mvc

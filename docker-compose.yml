@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+ ping-container:
+  image: wad-2020/ping:latest
+  restart: on-failure    
+  ports:
+   - 8080:8080
+ 
+ webflux-container:
+  image: wad-2020/webflux:latest
+  restart: on-failure
+  depends_on:
+   - ping-container
+  ports:
+   - 8081:8081
+
+ mvc-container:
+  image: wad-2020/mvc:latest
+  restart: on-failure
+  depends_on:
+   - ping-container
+  ports:
+   - 8082:8082
+
+ prometheus-container:
+  image: wad-2020/prometheus:latest
+  restart: on-failure
+  depends_on:
+   - ping-container
+   - mvc-container
+   - webflux-container
+  ports:
+   - 9090:9090

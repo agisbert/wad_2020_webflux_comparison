@@ -1,0 +1,1 @@
+dokcer-compose down && docker-compose up
